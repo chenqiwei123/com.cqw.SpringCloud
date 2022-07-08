@@ -31,3 +31,4 @@
 > **ZoneAvoidanceRule:** 默认规则,复合判断server所在区域的性能和server的可用性选择服务器
 
 ---
+### OpenFeign服务调用及OpenFeign超时控制
