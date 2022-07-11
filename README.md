@@ -39,3 +39,17 @@
 - **BASIC:**  仅记录请求方法、URL、响应状态码及执行时间;
 - **HEADERS:**  除了BASIC中定义的信息之外，还有请求和响应的头信息;
 - **FULL:**  除了HEADERS中定义的信息之外，还有请求和响应的正文及元数据。
+
+### 7.Hystrix介绍
+
+[官网介绍](https://github.com/Netflix/Hystrix/wiki/How-it-Works)
+
+**大神结论:**
+
+[Martin Fowler的相关论文](https://martinfowler.com/bliki/CircuitBreaker.html)
+
+- **服务降级及示例**
+- **服务熔断及示例**
+- **服务限流及示例**
+- **Hystrix图形化Dashboard搭建**`cloud-consumer-hystrix-dashboard9001`
+
