@@ -69,6 +69,8 @@
 
 ### 8.Gateway配置路由
 
+[官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/)
+
 - **方式一(YML文件配置)**
 
 ```yaml
