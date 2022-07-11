@@ -66,3 +66,69 @@
 - **服务限流及示例**
 - **Hystrix图形化Dashboard搭建**`cloud-consumer-hystrix-dashboard9001`
 ---
+
+### 8.Gateway配置路由
+
+- **方式一(YML文件配置)**
+
+```yaml
+server:
+  port: 9527
+
+spring:
+  application:
+    name: cloud-gateway
+#############################新增网关配置###########################
+  cloud:
+    gateway:
+      routes:
+        - id: payment_routh #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          uri: http://localhost:8001          #匹配后提供服务的路由地址
+          #uri: lb://cloud-payment-service #匹配后提供服务的路由地址
+          predicates:
+            - Path=/payment/get/**         # 断言，路径相匹配的进行路由
+
+        - id: payment_routh2 #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
+          uri: http://localhost:8001          #匹配后提供服务的路由地址
+          #uri: lb://cloud-payment-service #匹配后提供服务的路由地址
+          predicates:
+            - Path=/payment/lb/**         # 断言，路径相匹配的进行路由
+####################################################################
+
+eureka:
+  instance:
+    hostname: cloud-gateway-service
+  client: #服务提供者provider注册进eureka服务列表内
+    service-url:
+      register-with-eureka: true
+      fetch-registry: true
+      defaultZone: http://eureka7001.com:7001/eureka
+
+```
+
+- **方式二(配置类)**
+
+```java
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+@Configuration
+public class GateWayConfig
+{
+    @Bean
+    public RouteLocator customRouteLocator(RouteLocatorBuilder routeLocatorBuilder)
+    {
+        RouteLocatorBuilder.Builder routes = routeLocatorBuilder.routes();
+
+        routes.route("HaloWay",
+                r -> r.path("/guonei")
+                        .uri("http://news.baidu.com/guonei")).build();
+
+        return routes.build();
+    }
+}
+
+```
