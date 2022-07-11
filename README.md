@@ -69,9 +69,11 @@
 
 ### 8.Gateway配置路由
 
-[官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/)
+[官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-request-predicates-factories)
 
-- **方式一(YML文件配置)**
+#### 8.1 GateWay常用的Predicate
+
+-  **方式一: YML文件配置**
 
 ```yaml
 server:
@@ -108,7 +110,7 @@ eureka:
 
 ```
 
-- **方式二(配置类)**
+- **方式二 : 配置类**
 
 ```java
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -133,4 +135,43 @@ public class GateWayConfig
     }
 }
 
+```
+
+#### 8.2 GateWay的Filter
+
+[官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gatewayfilter-factories)
+
+- **自定义过滤配置类**
+
+```java
+
+package com.cqw.springcloud.Config;
+
+import org.springframework.cloud.gateway.route.RouteLocator;
+import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+@Configuration
+public class GateWayConfig
+{
+    @Bean
+    public RouteLocator customRouteLocator(RouteLocatorBuilder routeLocatorBuilder)
+    {
+        RouteLocatorBuilder.Builder routes = routeLocatorBuilder.routes();
+
+        routes.route("HaloWay",
+                r -> r.path("/guonei")
+                        .uri("http://news.baidu.com/guonei")).build();
+
+        return routes.build();
+    }
+}
+```
+
+**浏览器输入:**
+```textmate
+http://localhost:9527/payment/lb - 反问异常
+http://localhost:9527/payment/lb?uname=abc - 正常反问
 ```
