@@ -175,3 +175,94 @@ public class GateWayConfig
 http://localhost:9527/payment/lb - 反问异常
 http://localhost:9527/payment/lb?uname=abc - 正常反问
 ```
+
+### Spring Cloud Config
+
+#### 1.Spring Cloud Config Server配置
+
+[官方文档](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_spring_cloud_config_server)
+
+##### 步骤
+
+- **1.在GitHub新建一个仓库,并clone到本地**
+```shell
+git init 
+git clone https://github.com/chenqiwei123/springcloudConfig
+```
+
+- **2.添加依赖**
+```xml
+   <dependency>
+       <groupId>org.springframework.cloud</groupId>
+       <artifactId>spring-cloud-config-server</artifactId>
+   </dependency>
+   <dependency>
+       <groupId>org.springframework.cloud</groupId>
+       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+   </dependency>
+```
+
+- **3.application.yml配置文件**
+
+```yaml
+server:
+  port: 3344
+
+spring:
+  application:
+    name:  cloud-config-center #注册进Eureka服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: file:///D:/Git/SpringConfig/springcloudConfig #GitHub上面的git仓库名字
+      ####读取分支
+      label: master
+
+#服务注册到eureka地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka
+    register-with-eureka: false
+    fetch-registry: false
+```
+
+- **4.主启动类添加`@EnableConfigServer`**
+
+```java
+package com.cqw.springcloud;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.config.server.EnableConfigServer;
+
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigCenterMain3344
+{
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigCenterMain3344.class, args);
+    }
+}
+```
+
+- **5.启动注册中心并测试**
+
+1.我的注册中心是7001,启动他
+
+2.访问:[http://127.0.0.1:3344/master/config-dev.yml](http://127.0.0.1:3344/master/config-dev.yml)
+
+**页面返回结果:**
+
+```textmate
+config:
+  info: master branch,springcloud-config/config-dev.yml version=7
+```
+
+**配置读取规则**
+
+[官方文档](https://docs.spring.io/spring-cloud-config****/docs/current/reference/html/#_quick_start)
+
+
+
