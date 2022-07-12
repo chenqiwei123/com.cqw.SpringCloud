@@ -172,17 +172,18 @@ public class GateWayConfig
 
 **浏览器输入:**
 ```textmate
-http://localhost:9527/payment/lb - 反问异常
-http://localhost:9527/payment/lb?uname=abc - 正常反问
+http://localhost:9527/payment/lb - 访问异常
+http://localhost:9527/payment/lb?uname=abc - 正常访问
 ```
+---
 
-### Spring Cloud Config
+### 9.Spring Cloud Config
 
-#### 1.Spring Cloud Config Server配置
+#### 9.1.Spring Cloud Config Server配置
 
 [官方文档](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_spring_cloud_config_server)
 
-##### 步骤
+##### 步骤:
 
 - **1.在GitHub新建一个仓库,并clone到本地**
 ```shell
@@ -249,7 +250,7 @@ public class ConfigCenterMain3344
 
 - **5.启动注册中心并测试**
 
-1.我的注册中心是7001,启动他
+1.我的注册中心是7001,启动它
 
 2.访问:[http://127.0.0.1:3344/master/config-dev.yml](http://127.0.0.1:3344/master/config-dev.yml)
 
