@@ -2,7 +2,7 @@
 
 ---
 - [StudySpringCloudNotes](#studyspringcloudnotes)
-  * [1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端](#1------------resttemplate----------)
+  * [1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端](#1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端)
   * [2. Eureka集群的代码实现(注册中心:7001,7002;服务:8001,8002;客服端:81)](#2-eureka-------------7001-7002----8001-8002-----81-)
   * [3. Zookeeper和consul服务调用实现](#3-zookeeper-consul------)
   * [4. 定制化设置Ribbon负载规则](#4------ribbon----)
