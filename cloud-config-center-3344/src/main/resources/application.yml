@@ -9,11 +9,11 @@ spring:
       server:
         label: master
         git:
-          uri: https://github.com/chenqiwei123/springcloudConfig # git仓库的地址
-          skipSslValidation: true
-          search-paths: springcloudConfig  # git仓库地址下的相对地址，可以配置多个，用,分割。
-          username: chenqiwei
-          password: Chen123456...
+          uri: file:///D:/Git/SpringConfig/springcloudConfig # git仓库的地址
+#          skipSslValidation: true
+#          search-paths: /**  # git仓库地址下的相对地址，可以配置多个，用,分割。
+#          username: chenqiwei
+#          password: Chen123456...
 
 
 
