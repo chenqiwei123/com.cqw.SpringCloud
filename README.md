@@ -15,7 +15,7 @@
   * [9.Spring Cloud Config](#9spring-cloud-config)
     + [9.1.Spring Cloud Config Server](#91spring-cloud-config-server)
     + [9.1.Spring Cloud Config Client](#91spring-cloud-config-client)
-
+  * [10.SpringCloud Bus RabbitMQ](#10SpringCloud Bus RabbitMQ)
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ### 1.Use the RestTemplate to call the server from the client
@@ -351,3 +351,60 @@ public class ConfigClientController
 - **启动 注册中心、config服务端、config客户端**
 
 修改github中文件,并手动post属性config客服端 `curl -X POST "http://localhost:3355/actuator/refresh"`
+
+### 10.SpringCloud Bus RabbitMQ
+
+- **安装Erlang**
+  [下载地址](http://erlang.org/download/otp_win64_21.3.exe)
+
+- **安装RabbitMQ**
+  [下载地址](https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.8.3/rabbitmq-server-3.8.3.exe)
+
+- **安装RabbitMQ插件**
+
+```shell
+#进入到rabbitmq安装目录的sbin目录下
+cd C:\Program Files\RabbitMQ Server\rabbitmq_server-3.8.3\sbin
+#安装插件
+.\rabbitmq-plugins.bat enable rabbitmq_management
+```
+- **可视化插件**
+
+1. 访问地址查看是否安装成功：[http://localhost:15672/](http://localhost:15672/)
+
+2. 输入账号密码并登录：guest guest
+
+- **给Config Server添加依赖**
+
+```xml
+        <!--添加消息总线RabbitNQ支持-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bus-amqp</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+```
+- **添加rabbitmq配置文件**
+```yaml
+#rabbitmq相关配置<--------------------------
+rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    
+##rabbitmq相关配置,暴露bus刷新配置的端点<--------------------------
+management:
+  endpoints: #暴露bus刷新配置的端点
+    web:
+      exposure:
+        include: 'bus-refresh'
+```
+
+- 更改github内容,修改版本号,如果配置文件映射的是本地拉取的github文件,则pull一下.发送POST请求`curl -X POST "http://localhost:3344/actuator/bus-refresh"`
+> 出现405错误重启IDEA!,即可实现一次修改,广播通知,处处生效
+
