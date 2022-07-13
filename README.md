@@ -16,6 +16,7 @@
     + [9.1.Spring Cloud Config Server](#91spring-cloud-config-server)
     + [9.1.Spring Cloud Config Client](#91spring-cloud-config-client)
   * [10.SpringCloud Bus RabbitMQ](#10SpringCloud Bus RabbitMQ)
+
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 ### 1.Use the RestTemplate to call the server from the client
