@@ -2,7 +2,7 @@
 
 ---
 - [StudySpringCloudNotes](#studyspringcloudnotes)
-  * [1.Use the RestTemplate to call the server from the client哈德](#1use-the-resttemplate-to-call-the-server-from-the-client)
+  * [1.Use the RestTemplate to call the server from the client](#1use-the-resttemplate-to-call-the-server-from-the-client)
   * [2.Eureka cluster code implementation](#2eureka-cluster-code-implementation)
   * [3.Implement the Zookeeper and Consul service invocation](#3implement-the-zookeeper-and-consul-service-invocation)
   * [4.Customize Ribbon load rules](#4customize-ribbon-load-rules)
