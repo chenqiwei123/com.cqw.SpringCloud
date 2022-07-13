@@ -14,8 +14,9 @@
     + [8.2 GateWay_Filter](#82-gateway-filter)
   * [9.Spring Cloud Config](#9spring-cloud-config)
     + [9.1.Spring Cloud Config Server](#91spring-cloud-config-server)
+    + [步骤:](#---)
     + [9.1.Spring Cloud Config Client](#91spring-cloud-config-client)
-  * [10.SpringCloud Bus RabbitMQ](#10SpringCloud Bus RabbitMQ)
+  * [10.SpringCloud Bus RabbitMQ](#10springcloud-bus-rabbitmq)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
