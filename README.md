@@ -2,36 +2,35 @@
 
 ---
 - [StudySpringCloudNotes](#studyspringcloudnotes)
-  * [1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端](#1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端)
-  * [2. Eureka集群的代码实现(注册中心:7001,7002;服务:8001,8002;客服端:81)](#2-eureka-------------7001-7002----8001-8002-----81-)
-  * [3. Zookeeper和consul服务调用实现](#3-zookeeper-consul------)
-  * [4. 定制化设置Ribbon负载规则](#4------ribbon----)
-  * [5.OpenFeign服务调用及OpenFeign超时控制](#5openfeign-----openfeign----)
-  * [6.OpenFeign日志增强](#6openfeign----)
-  * [7.Hystrix介绍](#7hystrix--)
-  * [8.Gateway配置路由](#8gateway----)
-    + [8.1 GateWay常用的Predicate](#81-gateway---predicate)
-    + [8.2 GateWay的Filter](#82-gateway-filter)
-  * [9.Spring Cloud Config](#9spring-cloud-config)
-    + [9.1.Spring Cloud Config Server配置](#91spring-cloud-config-server--)
-    + [步骤:](#---)
-    + [9.1.Spring Cloud Config Client配置](#91spring-cloud-config-client--)
+  * [1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端](#1.Use the RestTemplate to call the server from the client)
+  * [2. Eureka集群的代码实现(注册中心:7001,7002;服务:8001,8002;客服端:81)](#2.Eureka cluster code implementation)
+  * [3. Zookeeper和consul服务调用实现](#3.Implement the Zookeeper and Consul service invocation)
+  * [4. 定制化设置Ribbon负载规则](#4.Customize Ribbon load rules)
+  * [5.OpenFeign服务调用及OpenFeign超时控制](#5.OpenFeign service invocation and OpenFeign timeout control)
+  * [6.OpenFeign日志增强](#6.OpenFeign)
+  * [7.Hystrix介绍](#7.Hystrix)
+  * [8.Gateway配置路由](#8.Gateway)
+    + [8.1 GateWay常用的Predicate](#8.1 GateWay_Predicate)
+    + [8.2 GateWay的Filter](#8.2 GateWay_Filter)
+  * [9.Spring Cloud Config](#9.Spring Cloud Config)
+    + [9.1.Spring Cloud Config Server配置](#9.1.Spring Cloud Config Server)
+    + [9.1.Spring Cloud Config Client配置](#9.1.Spring Cloud Config Server)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
-### 1.完成服务之间的调用,使用RestTemplate完成客户端调用服务端
+### 1.Use the RestTemplate to call the server from the client
 
 ---
 
-### 2. Eureka集群的代码实现(注册中心:7001,7002;服务:8001,8002;客服端:81)
+### 2.Eureka cluster code implementation
 
 ---
 
-### 3. Zookeeper和consul服务调用实现
+### 3.Implement the Zookeeper and Consul service invocation
 
 ---
 
-### 4. 定制化设置Ribbon负载规则
+### 4.Customize Ribbon load rules
 
 - **RoundRobinRule:** 轮询  
   <br />
@@ -60,17 +59,17 @@
 
 ---
 
-### 5.OpenFeign服务调用及OpenFeign超时控制
+### 5.OpenFeign service invocation and OpenFeign timeout control
 
 ---
-### 6.OpenFeign日志增强
+### 6.OpenFeign
 
 - **NONE:**  默认的，不显示任何日志;
 - **BASIC:**  仅记录请求方法、URL、响应状态码及执行时间;
 - **HEADERS:**  除了BASIC中定义的信息之外，还有请求和响应的头信息;
 - **FULL:**  除了HEADERS中定义的信息之外，还有请求和响应的正文及元数据。
 ---
-### 7.Hystrix介绍
+### 7.Hystrix
 
 [官网介绍](https://github.com/Netflix/Hystrix/wiki/How-it-Works)
 
@@ -84,11 +83,11 @@
 - **Hystrix图形化Dashboard搭建**`cloud-consumer-hystrix-dashboard9001`
 ---
 
-### 8.Gateway配置路由
+### 8.Gateway
 
 [官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gateway-request-predicates-factories)
 
-#### 8.1 GateWay常用的Predicate
+#### 8.1 GateWay_Predicate
 
 -  **方式一: YML文件配置**
 
@@ -154,7 +153,7 @@ public class GateWayConfig
 
 ```
 
-#### 8.2 GateWay的Filter
+#### 8.2 GateWay_Filter
 
 [官方文档](https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/#gatewayfilter-factories)
 
@@ -196,7 +195,7 @@ http://localhost:9527/payment/lb?uname=abc - 正常访问
 
 ### 9.Spring Cloud Config
 
-#### 9.1.Spring Cloud Config Server配置
+#### 9.1.Spring Cloud Config Server
 
 [官方文档](https://docs.spring.io/spring-cloud-config/docs/current/reference/html/#_spring_cloud_config_server)
 
@@ -283,7 +282,7 @@ config:
 [官方文档](https://docs.spring.io/spring-cloud-config****/docs/current/reference/html/#_quick_start)
 
 
-#### 9.1.Spring Cloud Config Client配置
+#### 9.1.Spring Cloud Config Client
 
 [官方文档](https://docs.spring.io/spring-cloud-config/docs/2.2.8.RELEASE/reference/html/#_spring_cloud_config_client)
 
