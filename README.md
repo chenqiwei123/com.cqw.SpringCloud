@@ -42,7 +42,8 @@
   * [11.SpringCloud Stream](#11SpringCloud-Stream)
   * [12.Spring Cloud Sleuth](#12Spring-Cloud-Sleuth)
 
-<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+- ### [Nacos学习记录](SpringCloudAlibaba.md)
+
 
 ### 1.Use the RestTemplate to call the server from the client
 
