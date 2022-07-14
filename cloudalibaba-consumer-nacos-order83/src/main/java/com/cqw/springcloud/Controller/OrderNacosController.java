@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.ServiceInstance;
 
+
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,12 +23,16 @@ public class OrderNacosController {
 
     @Value("${service-url.nacos-user-service}")
     private String serverURL;
-
+    @Resource
+    private LoadBalancerClient loadBalancerClient;
     @GetMapping(value = "/consumer/payment/nacos/{id}")
     public String paymentInfo(@PathVariable("id") Long id)
     {
+        ServiceInstance serviceInstance = loadBalancerClient.choose("nacos-provider");
+        String path = String.format("http://%s:%s/payment/nacos/%s",serviceInstance.getHost(),serviceInstance.getPort(),id);
+        System.out.println("request path:" +path);
         System.out.println("serverURL:"+serverURL);
-        return restTemplate.getForObject(serverURL+"/payment/nacos/"+id,String.class);
+        return restTemplate.getForObject(path,String.class);
     }
 
 }

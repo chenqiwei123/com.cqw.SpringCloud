@@ -58,3 +58,50 @@ startup.cmd -m standalone
 |cloudalibaba-provider-payment9001|服务提供者注册到nacos中|
 |cloudalibaba-provider-payment9002|服务提供者注册到nacos中|
 |cloudalibaba-consumer-nacos-order83|服务调用者,调用nacos注册中心的服务|
+
+**如果你用的是最新Nacos版本**
+
+- 有可能你会出现这个错误提示
+```shell
+A component required a bean of type 'org.springframework.cloud.client.loadbalancer.LoadBalancerClient' that could not be found.
+```
+
+- **原因**
+
+Alibaba-nacos-discovery取消了netflix的Ribbon负载均衡,那么如何使用`LoadBalancer`来看看LoadBalancer的实现类
+
+```java
+	@Configuration(proxyBeanMethods = false)
+	@ConditionalOnClass(RestTemplate.class) 
+	@Conditional(OnNoRibbonDefaultCondition.class)  
+	protected static class BlockingLoadbalancerClientConfig {
+
+		@Bean
+		@ConditionalOnBean(LoadBalancerClientFactory.class)
+		@Primary
+		public BlockingLoadBalancerClient blockingLoadBalancerClient(
+				LoadBalancerClientFactory loadBalancerClientFactory) {
+			return new BlockingLoadBalancerClient(loadBalancerClientFactory);
+		}
+
+	}
+```
+
+**看来源码便知,自定义一个LoadBalancerClientFactory对象注入Bean工厂**
+```java
+@Configuration
+public class ApplicationContextConfig
+{
+    @Bean
+//    @LoadBalanced //使用netflix的注入
+    public RestTemplate getRestTemplate()
+    {
+        return new RestTemplate();
+    }
+    @Bean
+    public LoadBalancerClientFactory getloadBalancerClientFactory(){
+        return new LoadBalancerClientFactory();
+    }
+
+}
+```

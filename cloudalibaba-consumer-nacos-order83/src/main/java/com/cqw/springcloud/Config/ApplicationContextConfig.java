@@ -1,6 +1,7 @@
 package com.cqw.springcloud.Config;
 
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+
+import org.springframework.cloud.loadbalancer.support.LoadBalancerClientFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -10,10 +11,14 @@ import org.springframework.web.client.RestTemplate;
 public class ApplicationContextConfig
 {
     @Bean
-    @LoadBalanced
+//    @LoadBalanced
     public RestTemplate getRestTemplate()
     {
         return new RestTemplate();
+    }
+    @Bean
+    public LoadBalancerClientFactory getloadBalancerClientFactory(){
+        return new LoadBalancerClientFactory();
     }
 
 }
