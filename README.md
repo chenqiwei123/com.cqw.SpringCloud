@@ -1,5 +1,28 @@
 ## StudySpringCloudNotes
-
+### 模块说明
+|模块名称|模块作用介绍说明|
+|---|---|
+|cloud-consumer-order80| 消费者调用Eureka注册中心提供者 |
+|cloud-api-commons| 自定义公共实体类 |
+|cloud-eureka-server7001| Eureka注册中心7001端口|
+|cloud-eureka-server7002| Eureka注册中心7002端口|
+|cloud-provider-payment8002| 服务提供者注册到Eureka注册中心 |
+|cloud-provider-payment8001| 服务提供者注册到Eureka注册中心 |
+|cloud-provider-payment8004| 服务提供者注册到Zookeeper注册中心|
+|cloud-consumerzk-order81| 消费者调用Zookeeper注册中心提供者 |
+|ConsulProvider8006| 务提供者注册到Consul注册中心 |
+|cloud-consumerconsul-order80| 消费者调用Consul注册中心提供者 |
+|cloud-consumer-feign-order80| 实现负载均衡调用方|
+|cloud-provider-hygtrix-payment8001|实现服务降级、服务熔断 |
+|cloud-consumer-feign-hystrix-order80| OpenFeign服务降级调用|
+|cloud-consumer-hystrix-dashboard9001| Hystrix图形化Dashboard搭建|
+|cloud-gateway-gateway9527| 网关GateWay进行predicate(断言)、Filter|
+|cloud-config-center-3344| config服务端 |
+|cloud-config-client-3355| config客户端|
+|cloud-config-client-3366| config客户端|
+|cloud-stream-rabbitmq-provider8801|stream生产者 |
+|cloud-stream-rabbitmq-consumer8802|stream消费者 |
+|cloud-stream-rabbitmq-consumer8803|stream消费者|
 ---
 - [StudySpringCloudNotes](#studyspringcloudnotes)
   * [1.Use the RestTemplate to call the server from the client](#1use-the-resttemplate-to-call-the-server-from-the-client)
@@ -17,6 +40,7 @@
     + [步骤:](#---)
     + [9.1.Spring Cloud Config Client](#91spring-cloud-config-client)
   * [10.SpringCloud Bus RabbitMQ](#10springcloud-bus-rabbitmq)
+  * [11.SpringCloud Stream](#11SpringCloud-Stream)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -410,3 +434,47 @@ management:
 - 更改github内容,修改版本号,如果配置文件映射的是本地拉取的github文件,则pull一下.发送POST请求`curl -X POST "http://localhost:3344/actuator/bus-refresh"`
 > 出现405错误重启IDEA!,即可实现一次修改,广播通知,处处生效
 
+### 11.SpringCloud Stream
+
+**常见MQ(消息中间件)**
+- ActiveMQ
+- RabbitMQ
+- RocketMQ
+- Kafka
+
+**Stream是什么及Binder介绍**
+
+[官方文档1](https://spring.io/projects/spring-cloud-stream#overview)
+
+[官方文档2](https://cloud.spring.io/spring-tloud-static/spring-cloud-stream/3.0.1.RELEASE/reference/html/Spring)
+
+[Cloud Stream中文指导手册](https://m.wang1314.com/doc/webapp/topic/20971999.html)
+
+|组成|	说明|
+|---|---|
+|Middleware	|中间件，目前只支持RabbitMQ和Kafka|
+|Binder|	Binder是应用与消息中间件之间的封装，目前实行了Kafka和RabbitMQ的Binder，通过Binder可以很方便的连接中间件，可以动态的改变消息类型(对应于Kafka的topic,RabbitMQ的exchange)，这些都可以通过配置文件来实现|
+|@Input	|注解标识输入通道，通过该输乎通道接收到的消息进入应用程序|
+|@Output	|注解标识输出通道，发布的消息将通过该通道离开应用程序|
+|@StreamListener|	监听队列，用于消费者的队列的消息接收|
+|@EnableBinding	|指信道channel和exchange绑定在一起|
+
+**代码中的五个模块测试**
+
+|模块名|模块职责说明|
+|---|---|
+|cloud-eureka-server7001           |  注册中心|
+|cloud-eureka-server7002           |  注册中心|
+|cloud-stream-rabbitmq-provider8801| 作为生产者进行发消息模块|
+|cloud-stream-rabbitmq-consumer8802| 作为消息接收模块|
+|cloud-stream-rabbitmq-consumer8803| 作为消息接收模块|
+
+**Stream之group解决消息重复消费**
+
+- **原理**
+
+> 微服务应用放置于同一个group中，就能够保证消息只会被其中一个应用消费一次。 不同的组是可以重复消费的，同一个组内会发生竞争关系，只有其中一个可以消费。 8802/8803都变成不同组，group两个不同
+
+- **解决消息重复消费**
+
+默认每个组的组号不一致,设置相同组的组号一样就好了 `spring.cloud.stream.bindings.output.group=Group` 
