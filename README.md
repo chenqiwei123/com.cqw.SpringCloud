@@ -40,6 +40,7 @@
     + [9.1.Spring Cloud Config Client](#91spring-cloud-config-client)
   * [10.SpringCloud Bus RabbitMQ](#10springcloud-bus-rabbitmq)
   * [11.SpringCloud Stream](#11SpringCloud-Stream)
+  * [12.Spring Cloud Sleuth](#12Spring-Cloud-Sleuth)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -470,3 +471,11 @@ management:
 - **解决消息重复消费**
 
 默认每个组的组号不一致,设置相同组的组号一样就好了 `spring.cloud.stream.bindings.output.group=Group` 
+
+---
+
+### 12.Spring Cloud Sleuth
+
+[官方文档](https://spring.io/projects/spring-cloud-sleuth)
+
+
