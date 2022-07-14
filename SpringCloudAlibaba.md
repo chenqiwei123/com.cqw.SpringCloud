@@ -61,6 +61,8 @@ startup.cmd -m standalone
 
 **如果你用的是最新Nacos版本**
 
+以这个版本为例:[Spring Cloud Alibaba 2021.0.1.0](https://spring-cloud-alibaba-group.github.io/github-pages/2021/en-us/index.html#_spring_cloud_alibaba_nacos_discovery)
+
 - 有可能你会出现这个错误提示
 ```shell
 A component required a bean of type 'org.springframework.cloud.client.loadbalancer.LoadBalancerClient' that could not be found.
